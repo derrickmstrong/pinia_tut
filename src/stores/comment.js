@@ -7,10 +7,7 @@ export const useCommentStore = defineStore({
         comments: [],    
     }),
     getters: {
-        getPostComments: () => {
-            const postStore = usePostStore();
-            return () => state.comments.filter((post) => post.postId === postStore.post.id )
-        },
+        getPostComments: (state) => state.comments.filter((post) => post.postId === usePostStore().post.id),
     },
     actions: {
         async fetchComments() {

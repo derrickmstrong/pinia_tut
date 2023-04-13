@@ -7,17 +7,12 @@ export const useAuthorStore = defineStore({
     authors: [],
   }),
   getters: {
-    getPostAuthor: (state) => {
-      const postStore = usePostStore();
-      return () => state.authors.find((author) => author.id === postStore.post.userId)
-    }
+    getPostAuthor: (state) => state.authors.find((author) => author.id === usePostStore().post.userId),
   },
   actions: {
     async fetchAuthors() {
       this.authors = await fetch('https://jsonplaceholder.typicode.com/users')
-      .then((res) =>
-        res.json()
-      )
+      .then((res) => res.json())
     }
   }
 })
